@@ -92,6 +92,13 @@ app.use("/", function (req, res) {
   });
 });
 
+app.use("/", function (req, res) {
+  res.status(504).json({
+    error: 2,
+    message: "gateway",
+  });
+});
+
 app.use((err, req, res, next) => {
   if (!err) return next();
   return res.status(403).json({
