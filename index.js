@@ -97,8 +97,9 @@ app.use((err, req, res, next) => {
   if (!err) return next();
   return res.status(403).json({
     error: 1,
-    message: "Page not Found",
+    message: "Page not Found 3",
   });
+  console.log("not found");
 });
 
 app.use(function(req, res){
