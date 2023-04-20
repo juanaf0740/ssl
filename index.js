@@ -88,22 +88,20 @@ app.get("/:domain", cache("1 hour"), apiRequestLimiter, function (req, res) {
 app.use("/", function (req, res) {
   res.status(404).json({
     error: 1,
-    message: "Page not Found 2",
+    message: "Page not Found",
   });
-  console.log("not found");
 });
 
 app.use((err, req, res, next) => {
   if (!err) return next();
   return res.status(403).json({
     error: 1,
-    message: "Page not Found 3",
+    message: "Page not Found",
   });
-  console.log("not found");
 });
 
-app.use(function(req, res){
-    req.setTimeout(10000, function(){
+app.use("/", function (req, res) {
+  req.setTimeout(10000, function(){
         res.json([
           {
             error: 2,
