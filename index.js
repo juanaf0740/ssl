@@ -92,13 +92,6 @@ app.use("/", function (req, res) {
   });
 });
 
-app.use("/", function (req, res) {
-  res.status(504).json({
-    error: 2,
-    message: "gateway",
-  });
-});
-
 app.use((err, req, res, next) => {
   if (!err) return next();
   return res.status(403).json({
@@ -108,7 +101,7 @@ app.use((err, req, res, next) => {
 });
 
 app.use("/", function (req, res) {
-  req.setTimeout(10000, function(){
+  res.setTimeout(10000, function(){
         res.json([
           {
             error: 2,
