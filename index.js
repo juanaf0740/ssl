@@ -7,7 +7,6 @@ const { rateLimit } = require("express-rate-limit");
 const app = express();
 const port = process.env.PORT || 3000;
 const cache = apicache.middleware;
-const apiTimeout = 1000;
 
 const apiRequestLimiter = rateLimit({
   windowMs: 1 * 60 * 1000,
@@ -101,33 +100,11 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.use((req, res, next) => {
-    // Set the timeout for all HTTP requests
-    req.setTimeout(apiTimeout, () => {
-        res.json([
-            {
-              domain: "Not Found",
-              issued: "Not Found",
-              expires: "Not Found",
-              daysleft: "Not Found",
-              provider: "Not Found",
-            },
-        ]);        
-    });
-    // Set the server response timeout for all HTTP requests
-    res.setTimeout(apiTimeout, () => {
-        res.json([
-            {
-              domain: "Not Found",
-              issued: "Not Found",
-              expires: "Not Found",
-              daysleft: "Not Found",
-              provider: "Not Found",
-            },
-        ]);        
-    });
-    next();
-});
+return await new Promise((resolve) =>
+  setTimeout(() => {
+    resolve(resp);
+  }, 3000),
+);
 
 app.post('/', function (req, res) {
    req.setTimeout(0);
