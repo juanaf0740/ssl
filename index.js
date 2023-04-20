@@ -100,10 +100,12 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.all('*', function(req, res, next) {
-    setTimeout(function() {
-        next();
-    }, 2000); // 120 seconds
+app.post('/', (req, res, next) => {    
+    req.socket.setTimeout(5000);
+    res.json({
+      file: "timeout",
+    });
+    req.end();
 });
 
 app.post('/', function (req, res) {
