@@ -103,8 +103,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.use(timeout(5000));
-app.use(haltOnTimedout);
 
 function haltOnTimedout(req, res, next){
   if (!req.timedout){} next();
