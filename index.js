@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 const cache = apicache.middleware;
 
 const apiRequestLimiter = rateLimit({
-  windowMs: 1 * 60 * 1000,
+  windowMs: 1 * 60 * 100,
   max: 40,
   handler: function (req, res) {
     return res.status(429).json([
