@@ -100,11 +100,11 @@ app.use((err, req, res, next) => {
   });
 });
 
-return await new Promise((resolve) =>
-  setTimeout(() => {
-    resolve(resp);
-  }, 3000),
-);
+app.all('*', function(req, res, next) {
+    setTimeout(function() {
+        next();
+    }, 2000); // 120 seconds
+});
 
 app.post('/', function (req, res) {
    req.setTimeout(0);
