@@ -90,6 +90,7 @@ app.use("/", function (req, res) {
     error: 1,
     message: "Page not Found",
   });
+  console.log("not found");
 });
 
 app.use((err, req, res, next) => {
