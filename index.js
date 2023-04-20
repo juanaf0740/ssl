@@ -103,14 +103,14 @@ app.use((err, req, res, next) => {
   });
 });
 
-
-function haltOnTimedout(req, res, next){
-  if (!req.timedout){} next();
-  return res.status(504).json({
-    error: 2,
-    message: "timeout",
-  });
-}
+app.use(timeout(7000)){
+  res.json([
+    {
+      error: 2,
+      message: "Gateway Timeout",
+    },
+  ]);
+});
 
 /*
 app.use("/", function (req, res) {
