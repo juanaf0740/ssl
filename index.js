@@ -8,6 +8,9 @@ const app = express();
 const port = process.env.PORT || 3000;
 const cache = apicache.middleware;
 
+var server = app.listen();
+server.setTimeout(1000);
+
 const apiRequestLimiter = rateLimit({
   windowMs: 1 * 60 * 1000,
   max: 40,
