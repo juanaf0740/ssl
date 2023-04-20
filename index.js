@@ -8,6 +8,9 @@ const app = express();
 const port = process.env.PORT || 3000;
 const cache = apicache.middleware;
 
+// var timeout = express.timeout
+var timeout = require('connect-timeout'); //express v4
+
 const apiRequestLimiter = rateLimit({
   windowMs: 1 * 60 * 1000,
   max: 40,
@@ -99,9 +102,6 @@ app.use((err, req, res, next) => {
     message: "Page not Found",
   });
 });
-
-// var timeout = express.timeout
-var timeout = require('connect-timeout'); //express v4
 
 app.use(timeout(5000));
 app.use(haltOnTimedout);
