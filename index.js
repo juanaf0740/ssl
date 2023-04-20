@@ -37,20 +37,6 @@ app.get("/:domain", cache("1 hour"), apiRequestLimiter, function (req, res) {
   res.header("Strict-Transport-Security", "max-age=63072000");
   res.setHeader("Content-Type", "application/json");
   app.disable("x-powered-by");
-  
-  app.use(function(req, res, next){
-        req.setTimeout(500, function(){        
-            res.json([
-                {
-                  domain: "Not Found",
-                  issued: "Not Found",
-                  expires: "Not Found",
-                  daysleft: "Not Found",
-                  provider: "Not Found",
-                },
-              ]);
-        });
-    });
 
   const get_domain = req.params.domain;
   sslChecker(get_domain)
