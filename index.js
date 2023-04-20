@@ -100,17 +100,30 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.post('/', (req, res, next) => {    
-    req.socket.setTimeout(5000);
-    res.json({
-      file: "timeout",
-    });
-    req.end();
-});
-
-app.post('/', function (req, res) {
-   req.setTimeout(0);
-});
+const bodyParser = require('body-parser');
+const timeout = require('connect-timeout');
+const haltOnTimedout = (req, res, next) => {
+  if (!req.timedout) {
+    next();
+  }
+}
+app.use(timeout('5s'))
+app.use(bodyParser.json({ extended: true }))
+app.use(haltOnTimedout)
+app.get('/', (req, res, next) => {
+  setTimeout(() => {
+    if (req.timedout) {
+      next();
+    }
+    else {
+      res.send('success');
+    }
+  }, Math.random() * 7000);
+})
+app.use((err, req, res, next) => {
+  res.send('timed out');
+})
+app.listen(3000);
 
 app.listen(port, function () {
   console.log("listening on port " + port);
