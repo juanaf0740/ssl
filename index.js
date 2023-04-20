@@ -100,6 +100,17 @@ app.use((err, req, res, next) => {
   });
 });
 
+app.use(function(req, res){
+    req.setTimeout(10000, function(){
+        res.json([
+          {
+            error: 2,
+            message: "Gateway Timeout",
+          },
+        ]);
+    });
+});
+
 app.listen(port, function () {
   console.log("listening on port " + port);
 });
