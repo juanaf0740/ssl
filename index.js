@@ -88,7 +88,7 @@ app.get("/:domain", cache("1 hour"), apiRequestLimiter, function (req, res) {
 app.use("/", function (req, res) {
   res.status(404).json({
     error: 1,
-    message: "Page or Data not Found",
+    message: "Page not Found",
   });
 });
 
@@ -96,7 +96,7 @@ app.use((err, req, res, next) => {
   if (!err) return next();
   return res.status(403).json({
     error: 1,
-    message: "Page or Data not Found",
+    message: "Page not Found",
   });
 });
 
