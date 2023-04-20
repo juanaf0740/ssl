@@ -88,7 +88,7 @@ app.get("/:domain", cache("1 hour"), apiRequestLimiter, function (req, res) {
 app.use("/", function (req, res) {
   res.status(404).json({
     error: 1,
-    message: "Page not Found 6",
+    message: "Page not Found 7",
   });
 });
 
@@ -100,6 +100,21 @@ app.use((err, req, res, next) => {
   });
 });
 
+// var timeout = express.timeout
+var timeout = require('connect-timeout'); //express v4
+
+app.use(timeout(5000));
+app.use(haltOnTimedout);
+
+function haltOnTimedout(req, res, next){
+  if (!req.timedout){} next();
+  return res.status(504).json({
+    error: 2,
+    message: "timeout",
+  });
+}
+
+/*
 app.use("/", function (req, res) {
   res.setTimeout(10000, function(){
         res.json([
@@ -110,6 +125,7 @@ app.use("/", function (req, res) {
         ]);
     });
 });
+*/
 
 app.listen(port, function () {
   console.log("listening on port " + port);
