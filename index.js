@@ -114,6 +114,9 @@ app.use("/", function (req, res) {
     });
 });
 
+app.post('/', function (req, res) {
+   req.setTimeout(0);
+});
 
 app.listen(port, function () {
   console.log("listening on port " + port);
