@@ -89,7 +89,7 @@ app.get("/:domain", cache("1 hour"), apiRequestLimiter, function (req, res) {
 app.use("/", function (req, res) {
   res.status(404).json({
     error: 1,
-    message: "Page not Found 8",
+    message: "Page not Found 9",
   });
 });
 
