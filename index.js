@@ -8,8 +8,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 const cache = apicache.middleware;
 
-var timeout = express.timeout
-//var timeout = require('connect-timeout');
+//var timeout = express.timeout
+var timeout = require('connect-timeout');
 
 const apiRequestLimiter = rateLimit({
   windowMs: 1 * 60 * 1000,
