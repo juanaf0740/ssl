@@ -10,7 +10,7 @@ const cache = apicache.middleware;
 
 const apiRequestLimiter = rateLimit({
   windowMs: 1 * 60 * 100,
-  max: 40,
+  max: 5,
   handler: function (req, res) {
     return res.status(429).json([
       {
